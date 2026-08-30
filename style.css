@@ -1,23 +1,23 @@
 :root {
     --bg-primary: #0f172a;
-    --bg-card: rgba(30, 41, 59, 0.7);
-    --border-color: rgba(255, 255, 255, 0.1);
+    --bg-card: rgba(30, 41, 59, 0.75);
+    --border-color: rgba(255, 255, 255, 0.12);
     
     --text-primary: #f8fafc;
     --text-secondary: #94a3b8;
     
     --color-x: #38bdf8; /* Cyan Blue */
-    --color-x-glow: rgba(56, 189, 248, 0.45);
+    --color-x-glow: rgba(56, 189, 248, 0.4);
     
     --color-o: #f43f5e; /* Rose Pink */
-    --color-o-glow: rgba(244, 63, 94, 0.45);
+    --color-o-glow: rgba(244, 63, 94, 0.4);
 
     --color-accent: #8b5cf6; /* Violet */
     --color-accent-hover: #7c3aed;
 
     --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-    --radius-lg: 18px;
-    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-md: 14px;
     --radius-sm: 8px;
 
     --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -53,7 +53,7 @@ body {
     z-index: 99;
 }
 
-/* Decorative Background Glows & Floating Shapes */
+/* Background Glows & Floating Shapes */
 .background-decorations {
     position: absolute;
     top: 0;
@@ -68,22 +68,22 @@ body {
 .glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
+    filter: blur(110px);
     opacity: 0.25;
 }
 
 .glow-1 {
-    width: 350px;
-    height: 350px;
+    width: 380px;
+    height: 380px;
     background: var(--color-x);
-    top: -50px;
-    left: -50px;
+    top: -60px;
+    left: -60px;
     animation: floatGlow 12s infinite alternate ease-in-out;
 }
 
 .glow-2 {
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
     background: var(--color-o);
     bottom: -100px;
     right: -100px;
@@ -112,7 +112,7 @@ body {
     100% { transform: translateY(-30px) rotate(45deg); }
 }
 
-/* Main Container */
+/* Main Container - Entrance Animation */
 .container {
     position: relative;
     z-index: 1;
@@ -121,6 +121,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    animation: pageEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 /* Header */
@@ -152,12 +164,12 @@ header h1 {
     align-items: center;
     justify-content: center;
     transition: var(--transition);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
 }
 
 .icon-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    border-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1) rotate(6deg);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Controls Card */
@@ -169,8 +181,8 @@ header h1 {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .mode-selector {
@@ -273,13 +285,13 @@ select#ai-difficulty:hover {
 .symbol-btn.active {
     background: var(--color-x);
     color: var(--bg-primary);
-    box-shadow: 0 0 10px var(--color-x-glow);
+    box-shadow: 0 0 12px var(--color-x-glow);
 }
 
 .symbol-btn[data-symbol="O"].active {
     background: var(--color-o);
     color: #fff;
-    box-shadow: 0 0 10px var(--color-o-glow);
+    box-shadow: 0 0 12px var(--color-o-glow);
 }
 
 /* Scoreboard */
@@ -295,11 +307,11 @@ select#ai-difficulty:hover {
     border-radius: var(--radius-md);
     padding: 12px 8px;
     text-align: center;
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     display: flex;
     flex-direction: column;
     gap: 4px;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .score-card.bump {
@@ -346,7 +358,7 @@ select#ai-difficulty:hover {
     border: 1px solid var(--border-color);
     padding: 12px;
     border-radius: var(--radius-md);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
     transition: var(--transition);
 }
 
@@ -362,7 +374,7 @@ select#ai-difficulty:hover {
     color: var(--color-o);
 }
 
-/* Game Board */
+/* Game Board Container */
 .board-container {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -370,9 +382,10 @@ select#ai-difficulty:hover {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     padding: 14px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
     position: relative;
+    transition: var(--transition);
 }
 
 .game-board {
@@ -385,7 +398,7 @@ select#ai-difficulty:hover {
     position: relative;
 }
 
-/* Cell Styling */
+/* Cell Styling & Entrance Animation */
 .cell {
     background: rgba(15, 23, 42, 0.7);
     border: 1px solid var(--border-color);
@@ -398,17 +411,33 @@ select#ai-difficulty:hover {
     position: relative;
     outline: none;
     overflow: hidden;
-    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    transition: background 0.25s, border-color 0.25s, transform 0.25s, box-shadow 0.25s, opacity 0.4s, filter 0.4s;
+    animation: cellLoadPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes cellLoadPop {
+    0% { opacity: 0; transform: scale(0.7); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Smooth Hover Effect over Empty Cells */
 .cell:hover:not(.x):not(.o) {
-    background: rgba(30, 41, 59, 0.9);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: translateY(-2px);
+    background: rgba(30, 41, 59, 0.95);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-.cell:active:not(.x):not(.o) {
-    transform: translateY(1px) scale(0.98);
+/* Click Scale / Bounce Animation */
+.cell.cell-clicked {
+    animation: cellClickBounce 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes cellClickBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(0.9); }
+    70% { transform: scale(1.06); }
+    100% { transform: scale(1); }
 }
 
 /* Ghost Preview on Hover */
@@ -417,7 +446,7 @@ select#ai-difficulty:hover {
     font-size: 2.8rem;
     font-weight: 800;
     color: var(--color-x);
-    opacity: 0.25;
+    opacity: 0.22;
     animation: fadeIn 0.15s ease-in;
 }
 
@@ -426,16 +455,16 @@ select#ai-difficulty:hover {
     font-size: 2.8rem;
     font-weight: 800;
     color: var(--color-o);
-    opacity: 0.25;
+    opacity: 0.22;
     animation: fadeIn 0.15s ease-in;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 0.25; transform: scale(1); }
+    to { opacity: 0.22; transform: scale(1); }
 }
 
-/* Cell Symbols SVG */
+/* Symbol SVG */
 .symbol-svg {
     width: 65%;
     height: 65%;
@@ -448,14 +477,25 @@ select#ai-difficulty:hover {
     stroke-linejoin: round;
 }
 
+/* Placed Symbol Subtle Glow Aura */
+.cell.x {
+    box-shadow: inset 0 0 15px var(--color-x-glow);
+    border-color: rgba(56, 189, 248, 0.35);
+}
+
+.cell.o {
+    box-shadow: inset 0 0 15px var(--color-o-glow);
+    border-color: rgba(244, 63, 94, 0.35);
+}
+
 /* Animated X Symbol */
 .cell.x .line-1 {
     stroke: var(--color-x);
     stroke-width: 10;
     stroke-dasharray: 100;
     stroke-dashoffset: 100;
-    animation: strokeDraw 0.2s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    filter: drop-shadow(0 0 6px var(--color-x-glow));
+    animation: strokeDraw 0.22s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    filter: drop-shadow(0 0 8px var(--color-x-glow));
 }
 
 .cell.x .line-2 {
@@ -463,8 +503,8 @@ select#ai-difficulty:hover {
     stroke-width: 10;
     stroke-dasharray: 100;
     stroke-dashoffset: 100;
-    animation: strokeDraw 0.2s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
-    filter: drop-shadow(0 0 6px var(--color-x-glow));
+    animation: strokeDraw 0.22s cubic-bezier(0.65, 0, 0.35, 1) 0.1s forwards;
+    filter: drop-shadow(0 0 8px var(--color-x-glow));
 }
 
 /* Animated O Symbol */
@@ -474,7 +514,7 @@ select#ai-difficulty:hover {
     stroke-dasharray: 283;
     stroke-dashoffset: 283;
     animation: strokeDraw 0.3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-    filter: drop-shadow(0 0 6px var(--color-o-glow));
+    filter: drop-shadow(0 0 8px var(--color-o-glow));
 }
 
 @keyframes strokeDraw {
@@ -483,25 +523,34 @@ select#ai-difficulty:hover {
     }
 }
 
-/* Winner Cell Glow */
+/* Winner Cell Glow & Pulse */
 .cell.winner {
     animation: pulseWinCell 1s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
     z-index: 2;
+    opacity: 1 !important;
+    filter: none !important;
 }
 
 .cell.winner.x {
-    background: rgba(56, 189, 248, 0.25);
+    background: rgba(56, 189, 248, 0.28);
     border-color: var(--color-x);
 }
 
 .cell.winner.o {
-    background: rgba(244, 63, 94, 0.25);
+    background: rgba(244, 63, 94, 0.28);
     border-color: var(--color-o);
 }
 
 @keyframes pulseWinCell {
-    0% { transform: scale(1); box-shadow: 0 0 10px currentColor; }
-    100% { transform: scale(1.05); box-shadow: 0 0 25px currentColor; }
+    0% { transform: scale(1); box-shadow: 0 0 12px currentColor; }
+    100% { transform: scale(1.05); box-shadow: 0 0 28px currentColor; }
+}
+
+/* Dim Non-Winning Cells when a player wins */
+.board-container.has-winner .cell:not(.winner) {
+    opacity: 0.35;
+    filter: blur(0.5px) grayscale(0.5);
+    transform: scale(0.95);
 }
 
 /* Winning Line SVG Overlay */
@@ -517,10 +566,10 @@ select#ai-difficulty:hover {
 }
 
 #winning-line {
-    stroke: #fbbf24; /* Golden glow line */
+    stroke: #fbbf24;
     stroke-width: 8;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 12px #fbbf24);
+    filter: drop-shadow(0 0 14px #fbbf24);
     stroke-dasharray: 600;
     stroke-dashoffset: 600;
     transition: stroke 0.3s;
@@ -581,7 +630,7 @@ select#ai-difficulty:hover {
     transform: translateY(-2px);
 }
 
-/* Result Modal */
+/* Modal */
 .modal {
     position: fixed;
     top: 0;

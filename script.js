@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const winnerIcon = document.getElementById('winner-icon');
     const modalPlayAgainBtn = document.getElementById('modal-play-again-btn');
 
+    const boardContainer = document.querySelector('.board-container');
     const gameBoard = document.getElementById('game-board');
     const winningLine = document.getElementById('winning-line');
 
@@ -238,7 +239,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.addEventListener('click', handleCellClick);
 
             // Ghost Preview on Hover
-            cell.addEventListener('mouseenter', (e) => {
+            cell.addEventListener('mouseenter', () => {
                 const idx = parseInt(cell.dataset.index);
                 if (board[idx] === null && gameActive) {
                     if (gameMode === 'pvp' || currentPlayer === userSymbol) {
@@ -320,9 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
         gameActive = true;
         currentPlayer = 'X';
 
-        cells.forEach(cell => {
+        boardContainer.classList.remove('has-winner');
+
+        cells.forEach((cell, idx) => {
             cell.innerHTML = '';
             cell.className = 'cell';
+            cell.style.animationDelay = `${idx * 0.04}s`;
         });
 
         // Reset SVG Strike Line
@@ -391,6 +395,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const cell = cells[index];
         cell.innerHTML = renderSymbolSVG(player);
         cell.classList.add(player.toLowerCase());
+        
+        // Add click bounce scale animation
+        cell.classList.add('cell-clicked');
+        
         playSound('move');
 
         const winInfo = checkWin(board);
@@ -442,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         winningLine.setAttribute('y2', y2);
 
         winningLine.style.stroke = winner === 'X' ? '#38bdf8' : '#f43f5e';
-        winningLine.style.filter = `drop-shadow(0 0 12px ${winner === 'X' ? '#38bdf8' : '#f43f5e'})`;
+        winningLine.style.filter = `drop-shadow(0 0 14px ${winner === 'X' ? '#38bdf8' : '#f43f5e'})`;
 
         winningLine.classList.remove('animate-line');
         void winningLine.offsetWidth; // Trigger reflow
@@ -454,6 +462,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (winInfo) {
             const { winner, combo } = winInfo;
+            
+            // Mark board container as having winner to dim non-winning cells
+            boardContainer.classList.add('has-winner');
+
             combo.forEach(idx => {
                 cells[idx].classList.add('winner');
             });
