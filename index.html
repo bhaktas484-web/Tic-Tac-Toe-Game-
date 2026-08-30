@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Canvas for Win Confetti Particles -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="background-decorations">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="floating-shapes">
+            <span class="shape shape-x" style="top: 15%; left: 10%;">✕</span>
+            <span class="shape shape-o" style="top: 70%; left: 8%;">◯</span>
+            <span class="shape shape-x" style="top: 75%; left: 85%;">✕</span>
+            <span class="shape shape-o" style="top: 20%; left: 80%;">◯</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Tic Tac Toe</h1>
+            <div class="header-controls">
+                <button id="sound-toggle-btn" class="icon-btn" title="Toggle Sound" aria-label="Toggle Sound">
+                    <span id="sound-icon">🔊</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mode & Difficulty Selection -->
+        <div class="controls-card">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="pvp">👥 2 Players</button>
+                <button class="mode-btn" data-mode="ai">🤖 vs AI</button>
+            </div>
+
+            <div id="ai-options" class="ai-options hidden">
+                <div class="option-group">
+                    <label for="ai-difficulty">Difficulty:</label>
+                    <select id="ai-difficulty">
+                        <option value="easy">Easy</option>
+                        <option value="medium">Medium</option>
+                        <option value="hard" selected>Unbeatable (Hard)</option>
+                    </select>
+                </div>
+                <div class="option-group">
+                    <label>Play as:</label>
+                    <div class="symbol-picker">
+                        <button class="symbol-btn active" data-symbol="X">X</button>
+                        <button class="symbol-btn" data-symbol="O">O</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="scoreboard">
+            <div class="score-card player-x" id="card-x">
+                <span class="score-label" id="label-x">Player X</span>
+                <span class="score-value" id="score-x">0</span>
+            </div>
+            <div class="score-card ties" id="card-ties">
+                <span class="score-label">Ties</span>
+                <span class="score-value" id="score-ties">0</span>
+            </div>
+            <div class="score-card player-o" id="card-o">
+                <span class="score-label" id="label-o">Player O</span>
+                <span class="score-value" id="score-o">0</span>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar" id="status-bar">
+            <span id="status-text">Player <span class="turn-highlight x-color">X</span>'s Turn</span>
+        </div>
+
+        <!-- Game Board Container -->
+        <div class="board-container">
+            <div class="game-board" id="game-board">
+                <button class="cell" data-index="0" aria-label="Cell 1"></button>
+                <button class="cell" data-index="1" aria-label="Cell 2"></button>
+                <button class="cell" data-index="2" aria-label="Cell 3"></button>
+                <button class="cell" data-index="3" aria-label="Cell 4"></button>
+                <button class="cell" data-index="4" aria-label="Cell 5"></button>
+                <button class="cell" data-index="5" aria-label="Cell 6"></button>
+                <button class="cell" data-index="6" aria-label="Cell 7"></button>
+                <button class="cell" data-index="7" aria-label="Cell 8"></button>
+                <button class="cell" data-index="8" aria-label="Cell 9"></button>
+
+                <!-- Animated Winning Line SVG Overlay -->
+                <svg class="winning-line-svg" id="winning-line-svg">
+                    <line id="winning-line" x1="0" y1="0" x2="0" y2="0" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Game Actions -->
+        <div class="action-buttons">
+            <button id="reset-game-btn" class="action-btn primary">Reset Board</button>
+            <button id="reset-scores-btn" class="action-btn secondary">Reset Scores</button>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div id="result-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="winner-icon" class="result-icon">🏆</span>
+                <h2 id="modal-title">Game Over</h2>
+            </div>
+            <p id="modal-message">Player X Wins!</p>
+            <button id="modal-play-again-btn" class="action-btn primary">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
